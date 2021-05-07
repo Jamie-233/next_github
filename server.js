@@ -11,9 +11,11 @@ app.prepare().then(() => {
   const server = new Koa();
   const router = new Router();
 
-  router.get('/test', (ctx) => {
-    ctx.body = '<span>test page</span>';
-  });
+  // router.get('/test', (ctx) => {
+  //   ctx.body = '<span>test page</span>';
+  //   ctx.body = { success: true };
+  //   ctx.set('Content-Type', 'application/json');
+  // });
 
   server.use(async (ctx, next) => {
     await next();
