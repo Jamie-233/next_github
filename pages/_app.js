@@ -1,7 +1,5 @@
-// import App from 'next/app';
+import App from 'next/app';
 import 'antd/dist/antd.css';
-import '../test.css';
+import '../style.css';
 
-export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
+export default App;
