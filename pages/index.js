@@ -2,11 +2,15 @@ import Link from 'next/link';
 import router from 'next/router';
 import { Button } from 'antd';
 
+// usage scenes tips:
+// add loading animation when route change start
+// cancel loading animation after route change is complete
+
 const events = [
   'routeChangeStart',
+  'beforeHistoryChange',
   'routeChangeComplete',
   'routeChangeError',
-  'beforeHistoryChange',
   'hashChangeStart',
   'hashChangeComplete'
 ];

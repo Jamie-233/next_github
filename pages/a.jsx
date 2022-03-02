@@ -13,6 +13,8 @@ const Test = props => {
   );
 };
 
+// usage: getInitialProps
+// get data from the page, get global data in App
 Test.getInitialProps = ({ query }) => {
   return {
     myParams: query
