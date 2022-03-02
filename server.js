@@ -1,5 +1,5 @@
-const next = require('next');
 const Koa = require('koa');
+const next = require('next');
 const Router = require('koa-router');
 
 // env equal dev not usage HMR
@@ -12,18 +12,12 @@ app.prepare().then(() => {
   const server = new Koa();
   const router = new Router();
 
-  server.use(async (ctx, next) => {
-    await handle(ctx.req, ctx.res);
-    ctx.respond = false;
-  });
-
-  router.get('/test/:id', async ctx => {
+  router.get('/a/:id', async ctx => {
     const id = ctx.params.id;
+    const actualPage = '/a';
+    const queryParams = { id };
 
-    await handle(ctx.req, ctx.res, {
-      pathname: '/test',
-      query: { id }
-    });
+    await app.render(ctx.req, ctx.res, actualPage, queryParams);
 
     ctx.respond = false;
 
@@ -32,6 +26,11 @@ app.prepare().then(() => {
   });
 
   server.use(router.routes());
+
+  server.use(async ctx => {
+    await handle(ctx.req, ctx.res);
+    ctx.respond = false;
+  });
 
   server.listen(3000, () => {
     console.log('koa server listen on 3000');
