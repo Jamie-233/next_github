@@ -2,9 +2,29 @@ import Link from 'next/link';
 import router from 'next/router';
 import { Button } from 'antd';
 
+const events = [
+  'routeChangeStart',
+  'routeChangeComplete',
+  'routeChangeError',
+  'beforeHistoryChange',
+  'hashChangeStart',
+  'hashChangeComplete'
+];
+
+function makeEvent(type) {
+  return (...args) => {
+    console.log(type, ...args);
+  };
+}
+
+events.forEach(event => {
+  router.events.on(event, makeEvent(event));
+});
+
 const Home = () => {
   const handleClick = () => {
     console.log('handleClick');
+
     router.push(
       {
         pathname: '/test/a',
@@ -19,7 +39,8 @@ const Home = () => {
   return (
     <>
       {/* usage as tag; refresh 404; URL masking; request next not /test/1 router; need usage Koa */}
-      <Link href="/test?id=1" as="/test/1" title="test">
+      {/* href={{ pathname: '/a', query: { id: 1 } }} */}
+      <Link href="/a?id=1" as="/a/1" title="test">
         <Button>TEST</Button>
       </Link>
       <Button type="primary" onClick={handleClick}>
