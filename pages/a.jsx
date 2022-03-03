@@ -15,10 +15,16 @@ const Test = props => {
 
 // usage: getInitialProps
 // get data from the page, get global data in App
-Test.getInitialProps = ({ query }) => {
-  return {
-    myParams: query
-  };
+Test.getInitialProps = async () => {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        name: 'Jamie'
+      });
+    }, 3000);
+  });
+
+  return await promise;
 };
 
 export default withRouter(Test);
